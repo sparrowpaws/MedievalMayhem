@@ -1,4 +1,0 @@
-repository "MedievalMayhem@sparrowpaws@cloud"
-  path "/"
-    br "/main"
-    co "/main"
