@@ -1,0 +1,10 @@
+A) Each unit has different animaton stages
+B) Each animation has 4 frames (4 is enough :P)
+C) Stage order on the sprite sheet is:
+   1) Idle 
+   2) Walk
+   3) Attack
+   4) Damage taken
+   5) Death animation
+   6) Special (Some units has special animation, like "Magic Cast" or alternative stages. 
+ 
