@@ -49,3 +49,5 @@ public class PlayerHealth : MonoBehaviour
         // Handle player death logic here (e.g., play animation, trigger game over, etc.)
         Debug.Log("Player has died");
 
+    }
+}
