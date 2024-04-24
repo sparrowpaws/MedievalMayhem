@@ -15,7 +15,7 @@ public class HealthBar : MonoBehaviour
 
     public void SetSliderMax(int amount)
     {
-        healthSliderMax.value = amount;
+        //healthSliderMax.value = amount;
         SetSlider(amount);
     }
 }

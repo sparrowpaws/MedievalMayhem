@@ -14,8 +14,10 @@ public class CharacterMovement : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+
     private void Update()
     {
+
         if (!isMoving)
         {
             input.x = Input.GetAxisRaw("Horizontal");
@@ -29,12 +31,12 @@ public class CharacterMovement : MonoBehaviour
                 // Set animation parameters based on movement direction
                 animator.SetFloat("Horizontal", input.x);
                 animator.SetFloat("Vertical", input.y);
-                animator.SetBool("IsMoving", true);
+                animator.SetBool("isMoving", true);
             }
             else
             {
                 // If not moving, play idle animation
-                animator.SetBool("IsMoving", false);
+                animator.SetBool("isMoving", false);
             }
         }
     }
@@ -51,6 +53,7 @@ public class CharacterMovement : MonoBehaviour
         isMoving = false;
     }
 }
+
 
 /*   public float moveSpeed;
 
