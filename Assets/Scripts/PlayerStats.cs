@@ -6,14 +6,12 @@ public class PlayerStats : MonoBehaviour
 {
     public int maxHealth = 100; // The maximum health the player can have
     private int currentHealth;  // The current health of the player
-
     public HealthBar healthBar; // Reference to the health bar script
 
     // Start is called before the first frame update
     private void Start()
     {
         currentHealth = maxHealth; // Set initial health to max
-
         healthBar.SetSliderMax(maxHealth); //sets the slider to show the max health (100)
     }
 
@@ -23,10 +21,6 @@ public class PlayerStats : MonoBehaviour
         {
             TakeDamage(20);
         }
-       // if (Input.GetKeyDown(KeyCode.Q))
-      //  {
-       //     Heal(30);
-     //   }
     }
 
     // Method to apply damage to the player
