@@ -2,31 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerStats : MonoBehaviour
 {
     public int maxHealth = 100; // The maximum health the player can have
-    public int currentHealth;  // The current health of the player
+    private int currentHealth;  // The current health of the player
+
     public HealthBar healthBar; // Reference to the health bar script
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         currentHealth = maxHealth; // Set initial health to max
-        if (healthBar != null)
+
+        healthBar.SetSliderMax(maxHealth); //sets the slider to show the max health (100)
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            healthBar.SetSliderMax(maxHealth); // Set max health in the health bar
+            TakeDamage(20);
         }
+       // if (Input.GetKeyDown(KeyCode.Q))
+      //  {
+       //     Heal(30);
+     //   }
     }
 
     // Method to apply damage to the player
     public void TakeDamage(int damage)
     {
         currentHealth -= damage; // Reduce health by the damage amount
-        if (healthBar != null)
-        {
-            healthBar.SetSlider(currentHealth); // Update the health bar
-        }
-
+        healthBar.SetSlider(currentHealth); // Update the health bar
         if (currentHealth <= 0)
         {
             Die(); // Handle player death
@@ -34,13 +41,15 @@ public class PlayerHealth : MonoBehaviour
     }
 
     // Method to heal the player
-    public void Heal(int healingAmount)
+    public void Heal(int amount)
     {
-        currentHealth = Mathf.Min(currentHealth + healingAmount, maxHealth); // Heal but not above max
-        if (healthBar != null)
+        currentHealth += amount;
+        //this if statement keeps from healing over max health
+        if(currentHealth > maxHealth)
         {
-            healthBar.SetSlider(currentHealth); // Update the health bar
+            currentHealth = maxHealth;
         }
+        healthBar.SetSlider(currentHealth);
     }
 
     // Method to handle player death

@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-
+/*
 public class CharacterMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
@@ -94,4 +94,3 @@ public class CharacterMovement : MonoBehaviour
        isMoving = false;
    }
 */
-
