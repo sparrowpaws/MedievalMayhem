@@ -5,8 +5,15 @@ using UnityEngine;
 public class SpeedBoost : MonoBehaviour
 {
     public int BoostAmount = 5;
-    // Start is called before the first frame update
-   public void Boost()
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Boost();
+        }
+    }
+    public void Boost()
     {
         Debug.Log("the speed has been boosted");
     }
