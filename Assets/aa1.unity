@@ -542,6 +542,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1160356261127867848, guid: 875e48afd23fd984b94fa6d7d883d9e2, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: de5a4405e7c70934099f2ec20c7db7c8, type: 2}
+    - target: {fileID: 3626916397498700004, guid: 875e48afd23fd984b94fa6d7d883d9e2, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 875e48afd23fd984b94fa6d7d883d9e2, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -930,6 +938,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e8e842db6613d54b8c517b3c9335695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 5
+  animator: {fileID: 0}
 --- !u!114 &1405724240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1183,7 +1193,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8652560fa7e93f4da2fa644b5d6c85a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BoostAmount: 5
+  boostAmount: 5
+  boostDuration: 5
+  cooldownDuration: 10
 --- !u!1 &1786686090
 GameObject:
   m_ObjectHideFlags: 0
