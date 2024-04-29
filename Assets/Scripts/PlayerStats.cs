@@ -5,30 +5,30 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     public int maxHealth = 100; // The maximum health the player can have
-    private int currentHealth;  // The current health of the player
+    private int PlayerCurrentHealth;  // The current health of the player
     public HealthBar healthBar; // Reference to the health bar script
 
-    // Start is called before the first frame update
+    
     private void Start()
     {
-        currentHealth = maxHealth; // Set initial health to max
-        healthBar.SetSliderMax(maxHealth); //sets the slider to show the max health (100)
+        PlayerCurrentHealth = maxHealth; // Set initial health to max
+        healthBar.SetSliderMax(maxHealth); // sets the slider to show the max health (100)
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        /* if (Input.GetKeyDown(KeyCode.Space))
         {
             TakeDamage(20);
-        }
+        } */
     }
 
     // Method to apply damage to the player
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage; // Reduce health by the damage amount
-        healthBar.SetSlider(currentHealth); // Update the health bar
-        if (currentHealth <= 0)
+        PlayerCurrentHealth -= damage; // Reduce health by the damage amount
+        healthBar.SetSlider(PlayerCurrentHealth); // Update the health bar
+        if (PlayerCurrentHealth <= 0)
         {
             Die(); // Handle player death
         }
@@ -37,13 +37,13 @@ public class PlayerStats : MonoBehaviour
     // Method to heal the player
     public void Heal(int amount)
     {
-        currentHealth += amount;
+        PlayerCurrentHealth += amount;
         //this if statement keeps from healing over max health
-        if(currentHealth > maxHealth)
+        if(PlayerCurrentHealth > maxHealth)
         {
-            currentHealth = maxHealth;
+            PlayerCurrentHealth = maxHealth;
         }
-        healthBar.SetSlider(currentHealth);
+        healthBar.SetSlider(PlayerCurrentHealth);
     }
 
     // Method to handle player death
