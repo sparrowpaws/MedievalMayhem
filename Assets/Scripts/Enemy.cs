@@ -47,14 +47,14 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            // Move towards the player
-            Vector2 direction = (player.position - transform.position).normalized;
+           // Move towards the player
+           Vector2 direction = (player.position - transform.position).normalized;
            rb.velocity = direction * moveSpeed;
 
-            // Set animation parameters 
-            animator.SetFloat("Horizontal", direction.x);
-            animator.SetFloat("Vertical", direction.y);
-            animator.SetBool("isMoving", true);
+           // Set animation parameters 
+           animator.SetFloat("Horizontal", direction.x);
+           animator.SetFloat("Vertical", direction.y);
+           animator.SetBool("isMoving", true);
         }
     }
 
