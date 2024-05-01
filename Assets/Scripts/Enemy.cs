@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     public int attackDamage = 10; // Damage dealt to the player per attack
 
     private Transform player;
-   private Rigidbody2D rb;
+    private Rigidbody2D rb;
     private Animator animator;
     private float nextAttackTime;
 
@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        
     }
 
     void Update()
@@ -51,10 +52,12 @@ public class Enemy : MonoBehaviour
            Vector2 direction = (player.position - transform.position).normalized;
            rb.velocity = direction * moveSpeed;
 
+
            // Set animation parameters 
            animator.SetFloat("Horizontal", direction.x);
            animator.SetFloat("Vertical", direction.y);
            animator.SetBool("isMoving", true);
+           animator.SetBool("isAttacking", false);
         }
     }
 
@@ -63,7 +66,6 @@ public class Enemy : MonoBehaviour
         // Perform attack action here
         Debug.Log("Enemy attacks!");
 
-        //need to fix so that isAttacking stays true/false the right amount of timeee
         animator.SetBool("isAttacking", true);
 
         // Damage the player
@@ -73,7 +75,6 @@ public class Enemy : MonoBehaviour
             playerStats.TakeDamage(attackDamage);
         }
         
-        animator.SetBool("isAttacking", false);
     }
 
     // Method to apply damage to the enemy

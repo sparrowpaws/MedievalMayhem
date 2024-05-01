@@ -4,7 +4,7 @@ using UnityEngine;
 public class CharacterMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
-    public Animator animator;
+    private Animator animator;
 
     private bool isMoving;
     private Vector2 input;

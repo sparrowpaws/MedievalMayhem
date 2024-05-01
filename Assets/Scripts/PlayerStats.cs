@@ -26,19 +26,19 @@ public class PlayerStats : MonoBehaviour
     private void Update()
     {
         // Determine the player's direction based on movement input (example using arrow keys)
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.W))
         {
             attackDirection = Vector2.up;
         }
-        else if (Input.GetKey(KeyCode.DownArrow))
+        else if (Input.GetKey(KeyCode.S))
         {
             attackDirection = Vector2.down;
         }
-        else if (Input.GetKey(KeyCode.LeftArrow))
+        else if (Input.GetKey(KeyCode.A))
         {
             attackDirection = Vector2.left;
         }
-        else if (Input.GetKey(KeyCode.RightArrow))
+        else if (Input.GetKey(KeyCode.D))
         {
             attackDirection = Vector2.right;
         }
