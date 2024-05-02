@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int maxHealth = 100; // Maximum health of the enemy
+    public int maxHealth = 80; // Maximum health of the enemy
     public int currentHealth; // Current health of the enemy
 
     public float moveSpeed = 3f;
@@ -92,7 +92,7 @@ public class Enemy : MonoBehaviour
     // Method to handle enemy death
     void Die()
     {
-        // Perform death actions here (e.g., play death animation, disable GameObject, etc.)
+        //add death animation here
         Debug.Log("Enemy defeated!");
         Destroy(gameObject); // Destroy the enemy GameObject
     }
