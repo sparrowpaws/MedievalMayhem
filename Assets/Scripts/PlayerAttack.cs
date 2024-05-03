@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    private Animator animator;
 
     //variables for attack
     public int attackDamage = 20;
@@ -13,6 +14,11 @@ public class PlayerAttack : MonoBehaviour
     public LayerMask enemyLayer;
     public Transform attackPoint;
 
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -20,12 +26,14 @@ public class PlayerAttack : MonoBehaviour
         {
             Debug.Log("the player attacked");
             Attack();
+            animator.SetBool("isAttacking", true);
             lastAttackTime = Time.time; //update the last attack time to current time
         }
     }
 
     void Attack()
     {
+        
         Debug.Log("Attack called");
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange);
 

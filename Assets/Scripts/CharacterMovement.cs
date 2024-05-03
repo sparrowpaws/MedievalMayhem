@@ -32,11 +32,13 @@ public class CharacterMovement : MonoBehaviour
                 animator.SetFloat("Horizontal", input.x);
                 animator.SetFloat("Vertical", input.y);
                 animator.SetBool("isMoving", true);
+                animator.SetBool("isAttacking", false);
             }
             else
             {
                 // If not moving, play idle animation
                 animator.SetBool("isMoving", false);
+                animator.SetBool("isAttacking", false);
             }
         }
     }
