@@ -10,7 +10,7 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
-    //function to exit the program
+    //function to exit the game
     public void QuitApp()
     {
         Application.Quit();
