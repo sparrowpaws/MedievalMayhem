@@ -272,7 +272,7 @@ BlendTree:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Blend Tree
+  m_Name: RunTree
   m_Childs:
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 57795f0c45a92194fa401412d27e30ef, type: 2}

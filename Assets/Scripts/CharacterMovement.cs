@@ -11,7 +11,7 @@ public class CharacterMovement : MonoBehaviour
 
    private void Start()
    {
-      animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
     }
 
 
@@ -54,4 +54,6 @@ public class CharacterMovement : MonoBehaviour
         transform.position = targetPos;
         isMoving = false;
     }
+
+    
 }

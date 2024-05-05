@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    /*
+
     public int maxHealth = 80; // Maximum health of the enemy
     public int currentHealth; // Current health of the enemy
 
@@ -13,13 +13,16 @@ public class Enemy : MonoBehaviour
     public float timeBetweenAttacks = 2f;
     public int attackDamage = 10; // Damage dealt to the player per attack
 
-
+    public float attackCooldown = 1.5f;
+    private float lastAttackTime = 0f;
 
     private Transform player;
     private Rigidbody2D rb;
     private Animator animator;
     private float nextAttackTime;
-
+    private BoxCollider2D boxCollider;
+    // Ensure the player and enemy don't collide with each other
+    private int playerLayerMask;
 
     void Start()
     {
@@ -27,7 +30,12 @@ public class Enemy : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        
+
+        // Add a BoxCollider component to the GameObject
+        boxCollider = GetComponent<BoxCollider2D>();
+
+        // Get the layer mask of the player
+        playerLayerMask = LayerMask.GetMask("Player");
     }
 
     void Update()
@@ -38,29 +46,38 @@ public class Enemy : MonoBehaviour
             Die();
             return; // Exit the Update method if the enemy is dead
         }
+        
+        Move();
+        
+    }
 
+
+    void Move()
+    {
         // Check if the player is in attack range
         if (Vector2.Distance(transform.position, player.position) <= attackRange)
         {
             // Attack the player
             if (Time.time >= nextAttackTime)
             {
-                Attack();
-                nextAttackTime = Time.time + timeBetweenAttacks;
-                
+                if (Time.time >= lastAttackTime + attackCooldown)
+                {
+                    Attack();
+                    nextAttackTime = Time.time + timeBetweenAttacks;
+                }
             }
         }
         else
         {
             // Move towards the player
-             Vector2 direction = (player.position - transform.position).normalized;
-              rb.velocity = direction * moveSpeed;
-
+           
+            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
+            
             // Set animation parameters 
-            animator.SetFloat("Horizontal", direction.x);
-           animator.SetFloat("Vertical", direction.y);
-           animator.SetBool("isMoving", true);
-           animator.SetBool("isAttacking", false);
+            animator.SetFloat("Horizontal", transform.position.x);
+            animator.SetFloat("Vertical", transform.position.y);
+            animator.SetBool("isMoving", true);
+            animator.SetBool("isAttacking", false);
         }
     }
 
@@ -77,11 +94,9 @@ public class Enemy : MonoBehaviour
         {
             playerStats.TakeDamage(attackDamage);
         }
-        
+
     }
-    
- 
- 
+
     // Method to apply damage to the enemy
     public void TakeDamage(int damage)
     {
@@ -101,133 +116,33 @@ public class Enemy : MonoBehaviour
         Debug.Log("Enemy defeated!");
         Destroy(gameObject); // Destroy the enemy GameObject
     }
-    */
 
-    
-    public float moveSpeed = 3f;
-    public float attackRange = 1.5f;
-    public float chaseRange = 10f;
-    public int maxHealth = 100;
-    public int currentHealth;
 
-    public Transform player;
-    public Animator animator;
 
-    private Rigidbody2D rb;
-    private Vector2 movement;
-    private bool isChasing = false;
-    private bool isAttacking = false;
-    private bool isDead = false;
-
-    void Start()
+    // Detect collisions with other colliders
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-
-        rb = GetComponent<Rigidbody2D>();
-        currentHealth = maxHealth;
-        animator = GetComponent<Animator>();
-    }
-
-    void Update()
-    {
-        if (isDead)
-            return;
-
-        if (player == null)
-            return;
-
-        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-
-        if (distanceToPlayer < attackRange)
+        // Check if the collision involves the player
+        if (collision.gameObject.CompareTag("Player"))
         {
-            AttackPlayer();
-        }
-        else if (distanceToPlayer < chaseRange)
-        {
-            ChasePlayer();
-        }
-        else
-        {
-            StopChasing();
+            Debug.Log("Collision with player detected!");
         }
     }
 
-    void FixedUpdate()
+    private void OnCollisionStay2D(Collision2D collision)
     {
-        if (isChasing && !isAttacking)
+        if (collision.gameObject.CompareTag("Player"))
         {
-            MoveEnemy();
+            Physics2D.IgnoreCollision(boxCollider, collision.collider, true);
         }
     }
 
-    void MoveEnemy()
+    // Ensure the player and enemy don't collide with each other
+    private void OnCollisionExit2D(Collision2D collision)
     {
-        movement = (player.position - transform.position).normalized;
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
-
-        
-
-        animator.SetFloat("Horizontal", movement.x);
-        animator.SetFloat("Vertical", movement.y);
-        animator.SetBool("isMoving", true);
-
-        
-    }
-
-    void ChasePlayer()
-    {
-        isChasing = true;
-        isAttacking = false;
-    }
-
-    void StopChasing()
-    {
-        isChasing = false;
-        isAttacking = false;
-        animator.SetBool("isMoving", false);
-    }
-
-    void AttackPlayer()
-    {
-        isAttacking = true;
-        animator.SetBool("isAttacking", true);
-    }
-
-    public void TakeDamage(int damage)
-    {
-        if (isDead)
-            return;
-
-        currentHealth -= damage;
-
-        if (currentHealth <= 0)
+        if (collision.gameObject.CompareTag("Player"))
         {
-            Die();
+            Physics2D.IgnoreCollision(boxCollider, collision.collider, false);
         }
     }
-
-    void Die()
-    {
-        isDead = true;
-        
-        // Disable enemy GameObject or any other death-related logic
-        Destroy(gameObject, 1f); // Destroy the enemy GameObject after 1 second
-    }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            // Perform damage to the player
-            Debug.Log("Player hit by enemy!");
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            animator.SetBool("isAttacking", false);
-        }
-    }
-    
 }
