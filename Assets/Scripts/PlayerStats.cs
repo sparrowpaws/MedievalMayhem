@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -47,6 +48,7 @@ public void TakeDamage(int damage)
     {
         // Handle player death logic here (e.g., play animation, trigger game over, etc.)
         Debug.Log("Player has died");
-
+        //call the death scene
+        SceneManager.LoadScene("DeathScene");
     }
 }
