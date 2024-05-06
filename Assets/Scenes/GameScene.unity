@@ -633,6 +633,7 @@ MonoBehaviour:
   - Goblins have been attacking innocent people in this area!
   - I will reward you if you can eliminate the threat! They have recently been spotted
     to the south.
+  index: 0
   contButton: {fileID: 0}
   wordSpeed: 0.06
   playerIsClose: 0
@@ -855,6 +856,7 @@ GameObject:
   - component: {fileID: 934786604}
   - component: {fileID: 934786603}
   - component: {fileID: 934786602}
+  - component: {fileID: 934786605}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -936,6 +938,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &934786605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 934786601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c67c11d89e493fe4a8455c6ff6a6e4fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 828917435}
 --- !u!1001 &986605532
 PrefabInstance:
   m_ObjectHideFlags: 0
