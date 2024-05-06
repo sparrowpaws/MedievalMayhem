@@ -19,11 +19,6 @@ public class NPC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerIsClose)
-        {
-            Debug.Log("player is close enough to NPC");
-        }
-
         if (Input.GetKeyDown(KeyCode.F) && playerIsClose)
         {
             if (dialoguePanel.activeInHierarchy)
@@ -39,7 +34,7 @@ public class NPC : MonoBehaviour
 
         if(dialogueText.text == dialogue[index])
         {
-            contButton.SetActive(true);
+           // contButton.SetActive(true);
         }
     }
 
@@ -61,7 +56,7 @@ public class NPC : MonoBehaviour
 
     public void NextLine()
     {
-        contButton.SetActive(false);    //disables skipping dialogue
+       // contButton.SetActive(false);    //disables skipping dialogue
 
         if (index < dialogue.Length - 1)
         {
