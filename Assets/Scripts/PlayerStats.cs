@@ -20,8 +20,10 @@ public class PlayerStats : MonoBehaviour
 // Method to apply damage to the player
 public void TakeDamage(int damage)
     {
+        
         PlayerCurrentHealth -= damage; // Reduce health by the damage amount
         healthBar.SetSlider(PlayerCurrentHealth); // Update the health bar
+        Debug.Log("The player took damage. Now at " + PlayerCurrentHealth + " health.");
         if (PlayerCurrentHealth <= 0)
         {
             Die(); // Handle player death

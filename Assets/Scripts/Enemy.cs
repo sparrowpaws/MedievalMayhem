@@ -101,7 +101,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage; // Reduce health by the damage amount
-
+        Debug.Log("Enemy took damage. Now at " + currentHealth + " health.");
         // Check if the enemy is dead
         if (currentHealth <= 0)
         {
