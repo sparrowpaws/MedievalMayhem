@@ -11,7 +11,7 @@ public class NPC : MonoBehaviour
     public string[] dialogue;
     private int index;
 
-    public GameObject contButton;
+   // public GameObject contButton;
     public float wordSpeed;
     public bool playerIsClose;
 
@@ -19,6 +19,15 @@ public class NPC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(playerIsClose == true)
+        {
+            Debug.Log("the player is close to the npc");
+        }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Debug.Log("the player pressed the F key");
+        }
+
         if (Input.GetKeyDown(KeyCode.F) && playerIsClose)
         {
             if (dialoguePanel.activeInHierarchy)
@@ -76,6 +85,7 @@ public class NPC : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("the player is close to the npc");
             playerIsClose = true;
         }
     }
