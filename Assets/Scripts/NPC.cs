@@ -14,7 +14,12 @@ public class NPC : MonoBehaviour
    // public GameObject contButton;
     public float wordSpeed;
     public bool playerIsClose;
+    private Animator animator;
 
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     // Update is called once per frame
     void Update()
