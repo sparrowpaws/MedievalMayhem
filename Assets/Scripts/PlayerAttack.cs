@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     private Animator animator;
+    //for the attack sound effect
+    public AudioSource attackSound;
 
     //variables for attack
     public int attackDamage = 20;
@@ -17,6 +19,10 @@ public class PlayerAttack : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
+        if (attackSound == null)
+        {
+            attackSound = GetComponent<AudioSource>(); // Get the AudioSource component if not assigned
+        }
     }
 
     // Update is called once per frame
@@ -24,7 +30,6 @@ public class PlayerAttack : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && Time.time >= lastAttackTime + attackCooldown)
         {
-            Debug.Log("the player attacked");
             Attack();
             animator.SetBool("isAttacking", true);
             lastAttackTime = Time.time; //update the last attack time to current time
@@ -33,8 +38,12 @@ public class PlayerAttack : MonoBehaviour
 
     void Attack()
     {
-        
-        Debug.Log("Attack called");
+        // Play the attack sound effect
+        if (attackSound != null)
+        {
+            attackSound.Play();
+        }
+
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange);
 
         foreach (Collider2D enemyCollider in hitEnemies)
