@@ -7,7 +7,7 @@ public class MainMenu : MonoBehaviour
     //function to change the scene
     public void GoToScene(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene("GameMainScene");
     }
 
     //function to exit the game

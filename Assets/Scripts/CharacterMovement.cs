@@ -5,11 +5,12 @@ public class CharacterMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
     private Animator animator;
-
+   
     private bool isMoving;
     private Vector2 input;
+    private bool isCollidingWithBoundary = false; // Flag to track collision with boundary
 
-   private void Start()
+    private void Start()
    {
         animator = GetComponent<Animator>();
     }
@@ -45,15 +46,40 @@ public class CharacterMovement : MonoBehaviour
 
     IEnumerator Move(Vector3 targetPos)
     {
-        isMoving = true;
-        while ((targetPos - transform.position).sqrMagnitude > Mathf.Epsilon)
+        if (!isCollidingWithBoundary)
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
-            yield return null;
+            isMoving = true;
+            while ((targetPos - transform.position).sqrMagnitude > Mathf.Epsilon)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
+                yield return null;
+            }
+            transform.position = targetPos;
+
+            isMoving = false;
+        } else
+        {
+            transform.position = Vector3.zero;
         }
-        transform.position = targetPos;
-        isMoving = false;
     }
 
-    
+    // Called when the player enters a trigger collider
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Boundary"))
+        {
+            Debug.Log("Player collides with boundary");
+            isCollidingWithBoundary = true;
+        }
+    }
+
+    // Called when the player exits a trigger collider
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Boundary"))
+        {
+            Debug.Log("Player exits boundary");
+            isCollidingWithBoundary = false;
+        }
+    }
 }
