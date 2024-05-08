@@ -23,9 +23,7 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
    
-    private BoxCollider2D boxCollider;
-    // Ensure the player and enemy don't collide with each other
-    //  private int playerLayerMask;
+    
 
     void Start()
     {
@@ -34,11 +32,7 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
-        // Add a BoxCollider component to the GameObject
-        //boxCollider = GetComponent<BoxCollider2D>();
-
-        // Get the layer mask of the player
-        //playerLayerMask = LayerMask.GetMask("Player");
+        
     }
 
     void Update()
@@ -127,32 +121,4 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject); // Destroy the enemy GameObject
     }
 
-
-/*
-    // Detect collisions with other colliders
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        // Check if the collision involves the player
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            Debug.Log("Collision with player detected!");
-        }
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            Physics2D.IgnoreCollision(boxCollider, collision.collider, true);
-        }
-    }
-
-    // Ensure the player and enemy don't collide with each other
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            Physics2D.IgnoreCollision(boxCollider, collision.collider, false);
-        }
-    } */
 }
